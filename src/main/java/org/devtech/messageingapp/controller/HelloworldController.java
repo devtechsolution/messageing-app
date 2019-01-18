@@ -1,8 +1,7 @@
 package org.devtech.messageingapp.controller;
 
+import org.devtech.messageingapp.model.HelloWorlBean;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 //Controller
 @RestController
@@ -17,4 +16,11 @@ public class HelloworldController {
     public String helloWorld(){
         return  "Hello World!";
     }
+
+    @GetMapping( path = "/hello-world-bean")
+    public HelloWorlBean helloWorldBean(){
+        return new HelloWorlBean("Hello World Bean");
+    }
+
+
 }
