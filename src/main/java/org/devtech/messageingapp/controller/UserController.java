@@ -4,6 +4,11 @@ import org.devtech.messageingapp.dao.UserDao;
 import org.devtech.messageingapp.exception.UserNotFoundException;
 import org.devtech.messageingapp.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Resource;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
+
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -22,31 +27,39 @@ public class UserController {
     //retriveAllUsers
     @GetMapping("/users")
 
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
 
-        return  userDaoImpl.findAll();
+        return userDaoImpl.findAll();
     }
 
 
     //GET /user/{id}
     //retriveUser(Long id)
     @GetMapping("/user/{id}")
-    public User getUserById(@PathVariable Long id){
+    public Resource<User> getUserById(@PathVariable Long id) {
 
         User user = userDaoImpl.findById(id);
-        if (user==null){
-            throw  new UserNotFoundException("id-"+ id);
+        if (user == null) {
+            throw new UserNotFoundException("id-" + id);
         }
-        return user;
+
+        //all-users , SERVER_PATH(ContextRoot)+ "/users"
+        //getAllUsers
+        Resource<User> resource = new Resource<>(user);
+        ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass())
+                .getAllUsers());
+        resource.add(linkTo.withRel("all-users"));
+
+        return resource;
     }
 
     /*
-    * @inut - details of user
-    * @Outpt- Created & Return the created URI
-    * */
+     * @inut - details of user
+     * @Outpt- Created & Return the created URI
+     * */
 
     @PostMapping("/users")
-    public ResponseEntity<Object> createUser(@Valid @RequestBody User user){
+    public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
 
         User saveUser = userDaoImpl.save(user);
         //Created
@@ -67,11 +80,11 @@ public class UserController {
     //Delete /user/{id}
     //retriveUser(Long id)
     @DeleteMapping("/user/{id}")
-    public void deleteUserById(@PathVariable Long id){
+    public void deleteUserById(@PathVariable Long id) {
 
         User user = userDaoImpl.deleteById(id);
-        if (user==null){
-            throw  new UserNotFoundException("id-"+ id);
+        if (user == null) {
+            throw new UserNotFoundException("id-" + id);
         }
         //return user;
     }
