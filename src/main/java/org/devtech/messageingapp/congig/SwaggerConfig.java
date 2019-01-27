@@ -1,23 +1,3 @@
-# messageing-app
-# Swagger API
-
-##update pom.xml
-```
-    <dependency>
-        <groupId>io.springfox</groupId>
-        <artifactId>springfox-swagger2</artifactId>
-        <version>2.4.0</version>
-    </dependency>
-
-    <dependency>
-        <groupId>io.springfox</groupId>
-        <artifactId>springfox-swagger-ui</artifactId>
-        <version>2.4.0</version>
-    </dependency>
-```
-# Swagger Configuration
-##SwaggerConfig.java
-```
 package org.devtech.messageingapp.congig;
 
 import org.springframework.context.annotation.Bean;
@@ -30,7 +10,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 //Enable Swagger
 @EnableSwagger2
-`
 public class SwaggerConfig {
 
     //Define Bean- Docket
@@ -43,4 +22,3 @@ public class SwaggerConfig {
         return  new Docket(DocumentationType.SWAGGER_2);
     }
 }
-```
