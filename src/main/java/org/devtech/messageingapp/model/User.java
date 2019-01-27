@@ -1,16 +1,22 @@
 package org.devtech.messageingapp.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
+@ApiModel(description = "All details about the USER")
 public class User {
 
     private Long id;
 
-    @Size(min =2, message = "Name should have at least two charachter")
+    @Size(min =2, message = "Name should have at least two character")
+    @ApiModelProperty(notes ="Name should have at least 2 character")
     private String name;
     @Past
+    @ApiModelProperty(notes ="Birth Date should be in past")
     private Date dob;
 
     private User(){
