@@ -1,4 +1,4 @@
-package org.devtech.messageingapp.congig;
+package org.devtech.messageingapp.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
