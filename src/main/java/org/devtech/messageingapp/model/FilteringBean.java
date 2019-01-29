@@ -1,8 +1,13 @@
 package org.devtech.messageingapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(value={"field1"})
 public class FilteringBean {
     private String field1;
     private String field2;
+    @JsonIgnore
     private String field3;
 
     public FilteringBean(String field1, String field2, String field3) {
